@@ -1,0 +1,4 @@
+1. Please save the images which you wish to share in the same folder or copy and paste the entire path after typing /file i.e the syntax looks as follow
+/file "path of the file tobe shared"
+
+2. If you try to open multiple clients using the same system it will be blocked since this program has a implemented feature to block multiple clients with same IP address as well as clients with same name
