@@ -2,6 +2,7 @@ import socket
 import threading
 import os
 
+# Function to broadcast a message to all connected clients, except the sender
 def broadcast(message, client_sockets, sender_socket):
     for client_socket in client_sockets.copy():  # Use a copy to avoid concurrent modification errors
         if client_socket != sender_socket:
@@ -11,7 +12,7 @@ def broadcast(message, client_sockets, sender_socket):
                 # Client disconnected abruptly
                 pass
 
-
+# Function to handle communication with a connected client
 def handle_client(client_socket, address, client_names, client_sockets, lock):
     while True:
         try:
@@ -32,6 +33,7 @@ def handle_client(client_socket, address, client_names, client_sockets, lock):
             break
 
         if data.startswith("REGISTER:"):
+            # Client wants to register its name
             client_name = data.split(":", 1)[1]
             with lock:
                 client_names[address] = client_name
@@ -79,7 +81,7 @@ def handle_client(client_socket, address, client_names, client_sockets, lock):
             response = "Server: Message received!"
             client_socket.send(response.encode())
 
-
+# Main function to run the server
 def main():
     host = ''
     port = 12345
